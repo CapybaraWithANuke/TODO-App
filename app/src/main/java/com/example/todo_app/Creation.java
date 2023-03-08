@@ -22,11 +22,9 @@ public class Creation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Creation.this, MainActivity.class);
-
-
-
+                intent.putExtra("name", name.getText());
+                intent.putExtra("date", date.getText());
                 startActivity(intent);
-
             }
         });
 

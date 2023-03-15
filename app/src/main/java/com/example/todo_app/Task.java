@@ -6,9 +6,9 @@ public class Task {
 
     private String name;
 
-    private LocalDate date;
+    private String date;
 
-    public Task(String name, LocalDate date) {
+    public Task(String name, String date) {
         this.name = name;
         this.date = date;
     }
@@ -17,7 +17,7 @@ public class Task {
         return name;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -25,7 +25,7 @@ public class Task {
         this.name = name;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

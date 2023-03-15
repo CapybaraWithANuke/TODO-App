@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -17,18 +19,19 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
     public static class TaskHolder extends RecyclerView.ViewHolder {
 
         private TextView taskName;
-        private LocalDate taskDate;
+        private TextView taskDate;
         public TaskHolder(View view) {
+
             super(view);
+            taskName = itemView.findViewById(R.id.newTaskName);
+            taskDate = itemView.findViewById(R.id.newTaskDate);
         }
 
-        public void setTaskDate(LocalDate localDate) {
-            this.taskDate = localDate;
+        private void setTaskData(Task task) {
+            this.taskName.setText(task.getName());
+            this.taskDate.setText(task.getDate());
         }
 
-        public void setTaskName(String name) {
-            this.taskName.setText(name);
-        }
     }
 
     public TasksAdapter(ArrayList<Task> tasks) {
@@ -50,8 +53,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        TaskHolder.setTaskName(tasks.get(position).getName());
-        TaskHolder.setTaskDate((tasks.get(position).getDate()));
+        TaskHolder.setTaskData(tasks.get(position));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -1,9 +1,11 @@
 package com.example.todo_app;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,21 +13,28 @@ import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
+    RecyclerView tasksRecycler;
+    TasksAdapter tasksAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         FloatingActionButton createButton = findViewById(R.id.createButton);
 
-        RecyclerView tasksRecycler = (RecyclerView) findViewById(R.id.recycler);
+        tasksRecycler = (RecyclerView) findViewById(R.id.recycler);
         tasksRecycler.setLayoutManager(new LinearLayoutManager(this));
-        TasksAdapter tasksAdapter = new TasksAdapter(tasks);
+        tasks = new ArrayList<>();
+
+        tasksAdapter = new TasksAdapter(tasks);
         tasksRecycler.setAdapter(tasksAdapter);
 
 
@@ -33,20 +42,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Creation.class);
-                startActivity(intent);
-                try {
-                    intent.wait();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                String newTaskName = getIntent().getExtras().getString("name");
-                String newTaskDate = getIntent().getExtras().getString("date");
-                Task task = new Task(newTaskName, LocalDate.parse(newTaskDate));
-                tasks.add(task);
-                System.out.println("\n\n\n\n\n\n\n\n" + task.getName());
+                startActivityForResult(intent, 0);
             }
         });
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        assert data != null;
+        String newTaskName = data.getExtras().getString("name");
+        String newTaskDate = data.getExtras().getString("date");
+        Task task = new Task(newTaskName, newTaskDate);
+        tasks.add(task);
+        tasksAdapter.notifyItemInserted(tasks.size()-1);
     }
 
 }

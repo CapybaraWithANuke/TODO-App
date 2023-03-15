@@ -3,40 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/newTaskName"
-        android:layout_width="238dp"
-        android:layout_height="36dp"
+        android:layout_width="237dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Name"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
+        android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:clickable="true"
-        app:srcCompat="@android:drawable/checkbox_off_background"
-        tools:layout_editor_absoluteX="339dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox"
         app:srcCompat="@android:drawable/ic_menu_delete"
-        tools:layout_editor_absoluteX="272dp"
         tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/newTaskDate"
-        android:layout_width="238dp"
-        android:layout_height="32dp"
+        android:layout_width="237dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
         android:text="Date"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="53dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

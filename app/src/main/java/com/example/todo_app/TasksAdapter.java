@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> {
 
     private ArrayList<Task> tasks;
-
     public static class TaskHolder extends RecyclerView.ViewHolder {
 
         private TextView taskName;
@@ -46,6 +45,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
 
         return new TaskHolder(view);
     }
+
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
